@@ -29,8 +29,8 @@ A lightweight task management system powered by Flask, SQLite, and FastMCP that 
 
 ```bash
 # 1. Clone repo
-git clone https://github.com/your-username/task-manager-app.git
-cd task_manager_app
+git clone https://github.com/sanjeevrohila/task_manager_app_claude_mcp.git
+cd task_manager_app_claude_mcp
 
 # 2. Create virtual environment
 python3 -m venv .venv
@@ -120,8 +120,8 @@ Edit your `claude_desktop_config.json` and add:
 {
   "mcpServers": {
     "task-manager": {
-      "command": "/Users/mac/sample_app/task_manager_app/.venv/bin/python",
-      "args": ["/Users/mac/sample_app/task_manager_app/mcp_server.py"]
+      "command": "/Users/mac/sample_app/task_manager_app_claude_mcp/.venv/bin/python",
+      "args": ["/Users/mac/sample_app/task_manager_app_claude_mcp/mcp_server.py"]
     }
   }
 }
