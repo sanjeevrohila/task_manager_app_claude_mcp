@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Smart Priority Task Manager</title>
+    <style>
+        body { font-family: sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; background: #f9f9f9; }
+        form { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input, select { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background: #007bff; color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; }
+        .task-card { background: white; padding: 15px; margin-bottom: 10px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: space-between; align-items: center; }
+        .task-info { flex-grow: 1; }
+        .badge { padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-left: 10px; }
+        .Overdue { background: #f8d7da; color: #721c24; }
+        .Urgent { background: #fff3cd; color: #856404; }
+        .Completed { background: #d4edda; color: #155724; text-decoration: line-through; }
+        .On\ Track { background: #cce5ff; color: #004085; }
+        .actions a { margin-left: 10px; text-decoration: none; color: #6c757d; }
+        .score { font-weight: bold; color: #e83e8c; }
+    </style>
+</head>
+<body>
+
+    <h2>Smart Priority Task Manager</h2>
+    
+    <!-- Add Task Form -->
+    <form action="/add" method="POST">
+        <div class="form-group">
+            <label>Task Description</label>
+            <input type="text" name="title" required placeholder="e.g., Fix production database bug">
+        </div>
+        <div class="form-group">
+            <label>Due Date</label>
+            <input type="date" name="due_date" required min="{{ today }}">
+        </div>
+        <div class="form-group">
+            <label>Importance Level (1 = Low, 5 = Critical)</label>
+            <select name="importance">
+                <option value="1">1 - Minimal impact</option>
+                <option value="2">2 - Low priority</option>
+                <option value="3">3 - Medium priority</option>
+                <option value="4">4 - High priority</option>
+                <option value="5">5 - Mission critical</option>
+            </select>
+        </div>
+        <button type="submit">Add to Pipeline</button>
+    </form>
+
+    <!-- Sorted Pipeline Output -->
+    <h3>Your High-Value Pipeline (Sorted by Priority Score)</h3>
+    {% for task in tasks %}
+    <div class="task-card">
+        <div class="task-info">
+            <strong {% if task.completed %}style="text-decoration: line-through; color: #aaa;"{% endif %}>{{ task.title }}</strong>
+            <span class="badge {{ task.status_tag }}">{{ task.status_tag }}</span>
+            <br>
+            <small>Due: {{ task.due_date }} | Importance: {{ task.importance }}/5</small>
+        </div>
+        <div>
+            <span class="score">Score: {{ task.priority_score }}</span>
+        </div>
+        <div class="actions">
+            <a href="/toggle/{{ task.id }}">Check/Uncheck</a>
+            <a href="/delete/{{ task.id }}" style="color: #dc3545;">Delete</a>
+        </div>
+    </div>
+    {% else %}
+    <p>No tasks found. Your pipeline is clear!</p>
+    {% endfor %}
+
+</body>
+</html>
