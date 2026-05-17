@@ -19,6 +19,18 @@ A lightweight task management system powered by Flask, SQLite, and FastMCP that 
 
 ---
 
+## Screenshots
+
+### 1. Web Application
+![Adding a task in the Web UI](docs/file_1.png)
+*Adding a high-priority task via the Flask web interface.*
+
+### 2. Claude Desktop Integration
+![Fetching tasks via Claude](docs/file_2.png)
+*Claude seamlessly fetching the task list using the `list_tasks` MCP tool.*
+
+---
+
 ## Quick Start
 
 ### Prerequisites
