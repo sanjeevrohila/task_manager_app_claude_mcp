@@ -105,11 +105,11 @@ Run these commands in your terminal:
 ```bash
 # Get Python executable path
 which python
-# Output: /Users/mac/sample_app/task_manager_app/.venv/bin/python
+# Output: /Users/mac/task_manager_app_claude_mcp/.venv/bin/python
 
 # Get full path to mcp_server.py
 pwd
-# Output: /Users/mac/sample_app/task_manager_app
+# Output: /Users/mac/task_manager_app_claude_mcp
 ```
 
 ### Step 3: Add to Claude Config
@@ -120,8 +120,8 @@ Edit your `claude_desktop_config.json` and add:
 {
   "mcpServers": {
     "task-manager": {
-      "command": "/Users/mac/sample_app/task_manager_app_claude_mcp/.venv/bin/python",
-      "args": ["/Users/mac/sample_app/task_manager_app_claude_mcp/mcp_server.py"]
+      "command": "/Users/mac/task_manager_app_claude_mcp/.venv/bin/python",
+      "args": ["/Users/mac/task_manager_app_claude_mcp/mcp_server.py"]
     }
   }
 }
@@ -171,7 +171,7 @@ Where:
 ## Project Structure
 
 ```
-task_manager_app/
+task_manager_app_claude_mcp/
 ├── app.py              # Flask web application
 ├── mcp_server.py       # MCP server for Claude
 ├── models.py           # Database models
@@ -364,7 +364,7 @@ Delete a task.
 ```bash
 # Fork and clone
 git clone your-fork
-cd task_manager_app
+cd task_manager_app_claude_mcp
 
 # Create branch
 git checkout -b feature/my-feature

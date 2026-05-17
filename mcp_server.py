@@ -1,3 +1,8 @@
+"""
+MCP Server for Smart Task Manager.
+Provides tools for Claude to interact with the task database via the Model Context Protocol.
+"""
+
 import os
 from fastmcp import FastMCP
 from flask import Flask
@@ -27,7 +32,13 @@ mcp = FastMCP("Smart-Task-Manager")
 
 @mcp.tool()
 def list_tasks():
-    """List all tasks sorted by priority."""
+    """
+    List all tasks sorted by priority.
+    
+    Returns:
+        list: A list of dictionaries containing task details (id, title, due_date, 
+              importance, completed, priority_score, status).
+    """
 
     with app.app_context():
         tasks = Task.query.all()
@@ -54,7 +65,17 @@ def list_tasks():
 
 @mcp.tool()
 def add_task(title: str, due_date: str, importance: int):
-    """Add a new task."""
+    """
+    Add a new task to the database.
+    
+    Args:
+        title (str): The title or description of the task.
+        due_date (str): The due date of the task in 'YYYY-MM-DD' format.
+        importance (int): The importance level of the task on a scale of 1 to 5.
+        
+    Returns:
+        dict: A dictionary containing the success status and the new task_id.
+    """
 
     with app.app_context():
 
@@ -78,7 +99,16 @@ def add_task(title: str, due_date: str, importance: int):
 
 @mcp.tool()
 def complete_task(task_id: int):
-    """Toggle task completion."""
+    """
+    Toggle the completion status of a specific task.
+    
+    Args:
+        task_id (int): The unique identifier of the task to toggle.
+        
+    Returns:
+        dict: A dictionary with the success status and new 'completed' boolean value,
+              or an error message if the task is not found.
+    """
 
     with app.app_context():
 
@@ -99,7 +129,15 @@ def complete_task(task_id: int):
 
 @mcp.tool()
 def delete_task(task_id: int):
-    """Delete a task."""
+    """
+    Delete a specific task from the database.
+    
+    Args:
+        task_id (int): The unique identifier of the task to delete.
+        
+    Returns:
+        dict: A dictionary containing the success status, or an error message if the task is not found.
+    """
 
     with app.app_context():
 
