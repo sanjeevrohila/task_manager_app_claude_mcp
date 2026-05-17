@@ -1,0 +1,7 @@
+[project]
+name = "task-manager-app"
+version = "0.1.0"
+description = "A classical app to manage your daily tasks"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
